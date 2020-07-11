@@ -8,12 +8,10 @@ using System.Net;
 using System.Net.Http;
 using ICSharpCode.SharpZipLib.BZip2;
 using System.IO;
-using CsvHelper;
 using System.Security.Policy;
 using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
-using CsvHelper.Configuration;
 using System.Globalization;
 
 namespace MVDPassportLoader
