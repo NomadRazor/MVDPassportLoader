@@ -13,6 +13,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
+using System.Data.Common;
 
 namespace MVDPassportLoader
 {
@@ -66,8 +67,8 @@ namespace MVDPassportLoader
                 using (SqlCommand _cmd = _cn.CreateCommand())
                 {
                     _cmd.CommandText = "truncate table BadPassports";
-                    _cmd.ExecuteNonQuery();   
-                        
+                    _cmd.ExecuteNonQuery();
+                    
                         using (FxCsvReader<Passport> _CSV = new FxCsvReader<Passport>(FilePath))
                         {
                             using(SqlBulkCopy _copier = new SqlBulkCopy(_cn))
@@ -79,6 +80,7 @@ namespace MVDPassportLoader
                                 _copier.ColumnMappings.Add(0, 0);
                                 _copier.ColumnMappings.Add(1, 1);
                                 _copier.WriteToServer(_CSV);
+                            
 
                             }
                         }
@@ -92,7 +94,7 @@ namespace MVDPassportLoader
 
         private void ShowProgress(object sender, SqlRowsCopiedEventArgs args)
         {
-            Console.WriteLine($"Uploaded = {args.RowsCopied}");
+            SingleRowPrint($"Uploaded = {args.RowsCopied}");
         }
 
         private void SingleRowPrint( string message )
