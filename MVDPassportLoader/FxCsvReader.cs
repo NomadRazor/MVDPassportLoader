@@ -150,7 +150,7 @@ namespace MVDPassportLoader
             
         }
 
-        public object ByName(string name )
+        private object ByName(string name )
         {
             for (int i = 0; i < properties.Length; i++)
             {
